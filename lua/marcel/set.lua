@@ -1,3 +1,6 @@
+-- for checking if running on Windows
+local sep = package.config:sub(1,1)
+
 -- line numbers settings
 vim.opt.nu = true
 vim.opt.relativenumber = true
@@ -13,7 +16,11 @@ vim.opt.wrap = false
 -- undo tree
 vim.opt.swapfile = false
 vim.opt.backup = false
-vim.opt.undodir = os.getenv("HOME") .. "/.vim/undodir"
+if sep == '\\' then
+  vim.opt.undodir = os.getenv("LOCALAPPDATA") .. "/nvim-data/undodir"
+else
+  vim.opt.undodir = os.getenv("HOME") .. "/.vim/undodir"
+end
 vim.opt.undofile = true
 
 -- search highlight
